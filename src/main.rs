@@ -1,5 +1,8 @@
 extern crate sdl2;
 
+use actor::Actor;
+mod actor;
+
 fn main() {
   sdl2::init(sdl2::InitVideo);
 
@@ -13,7 +16,14 @@ fn main() {
     Err(err) => fail!(format!("failed to create renderer: {}", err))
   };
 
+
   let mut color = sdl2::pixels::RGB(0, 0, 0);
+  let mut character = Actor {
+    x: 100,
+    y: 100,
+    vx: 0,
+    vy: 0
+  };
 
   'main: loop {
     'event: loop {
@@ -24,6 +34,10 @@ fn main() {
           sdl2::keycode::Num1Key => color = sdl2::pixels::RGB(255, 0, 0),
           sdl2::keycode::Num2Key => color = sdl2::pixels::RGB(0, 255, 0),
           sdl2::keycode::Num3Key => color = sdl2::pixels::RGB(0, 0, 255),
+          sdl2::keycode::WKey => character.vy = -1,
+          sdl2::keycode::SKey => character.vy = 1,
+          sdl2::keycode::AKey => character.vx = -1,
+          sdl2::keycode::DKey => character.vx = 1,
           _ => {}
         },
         sdl2::event::NoEvent => break 'event,
@@ -31,8 +45,11 @@ fn main() {
       }
     }
     // render
+    character.update();
     let _ = renderer.set_draw_color(color);
     let _ = renderer.clear();
+    let _ = renderer.set_draw_color(sdl2::pixels::RGB(255, 255, 255));
+    let _ = renderer.fill_rect(&sdl2::rect::Rect{x: character.x, y: character.y, w: 64, h: 64});
     renderer.present();
   }
 
