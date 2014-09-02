@@ -13,12 +13,28 @@ fn main() {
     Err(err) => fail!(format!("failed to create renderer: {}", err))
   };
 
-  let _ = renderer.set_draw_color(sdl2::pixels::RGB(255, 0, 0));
-  let _ = renderer.clear();
-  renderer.present();
+  let mut color = sdl2::pixels::RGB(0, 0, 0);
 
-  sdl2::timer::delay(2000);
+  'main: loop {
+    'event: loop {
+      match sdl2::event::poll_event() {
+        sdl2::event::QuitEvent(_) => break 'main,
+        sdl2::event::KeyDownEvent(_, _, key, _, _) => match key {
+          sdl2::keycode::EscapeKey | sdl2::keycode::QKey => break 'main,
+          sdl2::keycode::Num1Key => color = sdl2::pixels::RGB(255, 0, 0),
+          sdl2::keycode::Num2Key => color = sdl2::pixels::RGB(0, 255, 0),
+          sdl2::keycode::Num3Key => color = sdl2::pixels::RGB(0, 0, 255),
+          _ => {}
+        },
+        sdl2::event::NoEvent => break 'event,
+        _ => {}
+      }
+    }
+    // render
+    let _ = renderer.set_draw_color(color);
+    let _ = renderer.clear();
+    renderer.present();
+  }
+
   sdl2::quit();
-
-  println!("Hello, world!")
 }
