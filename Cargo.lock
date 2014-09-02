@@ -1,4 +1,12 @@
 [root]
 name = "plane"
 version = "0.0.1"
+dependencies = [
+ "sdl2 0.0.1 (git+https://github.com/AngryLawyer/rust-sdl2.git#b4482ef47ef62714088d777bb784e5b94285b3ff)",
+]
+
+[[package]]
+name = "sdl2"
+version = "0.0.1"
+source = "git+https://github.com/AngryLawyer/rust-sdl2.git#b4482ef47ef62714088d777bb784e5b94285b3ff"
 
