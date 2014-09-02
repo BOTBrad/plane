@@ -1,24 +1,13 @@
 extern crate sdl2;
 
-use actor::Actor;
 mod actor;
+mod graphics;
 
 fn main() {
-  sdl2::init(sdl2::InitVideo);
-
-  let window = match sdl2::video::Window::new("rust-sdl2 demo: Video", sdl2::video::PosCentered, sdl2::video::PosCentered, 800, 600, sdl2::video::OpenGL) {
-    Ok(window) => window,
-    Err(err) => fail!(format!("failed to create window: {}", err))
-  };
-
-  let renderer = match sdl2::render::Renderer::from_window(window, sdl2::render::DriverAuto, sdl2::render::Accelerated) {
-    Ok(renderer) => renderer,
-    Err(err) => fail!(format!("failed to create renderer: {}", err))
-  };
-
+  let graphics = graphics::Graphics::new(800, 600);
 
   let mut color = sdl2::pixels::RGB(0, 0, 0);
-  let mut character = Actor {
+  let mut character = actor::Actor {
     x: 100,
     y: 100,
     vx: 0,
@@ -46,12 +35,7 @@ fn main() {
     }
     // render
     character.update();
-    let _ = renderer.set_draw_color(color);
-    let _ = renderer.clear();
-    let _ = renderer.set_draw_color(sdl2::pixels::RGB(255, 255, 255));
-    let _ = renderer.fill_rect(&sdl2::rect::Rect{x: character.x, y: character.y, w: 64, h: 64});
-    renderer.present();
+    graphics.update(&character, &color);
   }
-
-  sdl2::quit();
+  graphics.quit();
 }
