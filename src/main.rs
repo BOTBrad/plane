@@ -7,13 +7,7 @@ fn main() {
   let graphics = graphics::Graphics::new(800, 600);
 
   let mut color = sdl2::pixels::RGB(0, 0, 0);
-  let mut character = actor::Actor {
-    x: 100,
-    y: 500,
-    v: 1,
-    direction: actor::Neutral,
-    vy: 0
-  };
+  let mut character = actor::Actor::new(100, 500, 1, 20, 1);
 
   'main: loop {
     'event: loop {
@@ -24,13 +18,15 @@ fn main() {
           sdl2::keycode::Num1Key => color = sdl2::pixels::RGB(255, 0, 0),
           sdl2::keycode::Num2Key => color = sdl2::pixels::RGB(0, 255, 0),
           sdl2::keycode::Num3Key => color = sdl2::pixels::RGB(0, 0, 255),
-          sdl2::keycode::WKey => character.vy = -1,
-          sdl2::keycode::SKey => character.vy = 1,
+          sdl2::keycode::WKey => character.change_jump_state(actor::Jumping),
+          sdl2::keycode::SKey => character.change_jump_state(actor::Crouching),
           sdl2::keycode::AKey => character.change_dir(actor::Left),
           sdl2::keycode::DKey => character.change_dir(actor::Right),
           _ => {}
         },
         sdl2::event::KeyUpEvent(_, _, key, _, _) => match key {
+          sdl2::keycode::WKey => character.change_jump_state(actor::Crouching),
+          sdl2::keycode::SKey => character.change_jump_state(actor::Jumping),
           sdl2::keycode::AKey => character.change_dir(actor::Right),
           sdl2::keycode::DKey => character.change_dir(actor::Left),
           _ => {}
