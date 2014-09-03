@@ -3,14 +3,17 @@ extern crate sdl2;
 mod actor;
 mod global;
 mod graphics;
+mod timer;
 
 fn main() {
   let graphics = graphics::Graphics::new(global::SCREEN_SIZE);
 
+  let mut timer = timer::Timer::new();
   let mut color = sdl2::pixels::RGB(0, 0, 0);
-  let mut character = actor::Actor::new(100, 600, 1, 20, 1);
+  let mut character = actor::Actor::new(100, 600, 3, 40, 12);
 
   'main: loop {
+    while !timer.is_next_frame() {}
     'event: loop {
       match sdl2::event::poll_event() {
         sdl2::event::QuitEvent(_) => break 'main,
