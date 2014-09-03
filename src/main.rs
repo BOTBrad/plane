@@ -9,8 +9,9 @@ fn main() {
   let mut color = sdl2::pixels::RGB(0, 0, 0);
   let mut character = actor::Actor {
     x: 100,
-    y: 100,
-    vx: 0,
+    y: 500,
+    v: 1,
+    direction: actor::Neutral,
     vy: 0
   };
 
@@ -25,8 +26,13 @@ fn main() {
           sdl2::keycode::Num3Key => color = sdl2::pixels::RGB(0, 0, 255),
           sdl2::keycode::WKey => character.vy = -1,
           sdl2::keycode::SKey => character.vy = 1,
-          sdl2::keycode::AKey => character.vx = -1,
-          sdl2::keycode::DKey => character.vx = 1,
+          sdl2::keycode::AKey => character.change_dir(actor::Left),
+          sdl2::keycode::DKey => character.change_dir(actor::Right),
+          _ => {}
+        },
+        sdl2::event::KeyUpEvent(_, _, key, _, _) => match key {
+          sdl2::keycode::AKey => character.change_dir(actor::Right),
+          sdl2::keycode::DKey => character.change_dir(actor::Left),
           _ => {}
         },
         sdl2::event::NoEvent => break 'event,

@@ -1,16 +1,34 @@
 use graphics;
 
+pub enum Direction {
+  Left,
+  Neutral,
+  Right
+}
+
 pub struct Actor {
   pub x: i32,
   pub y: i32,
-  pub vx: i32,
+  pub v: i32,
+  pub direction: Direction,
   pub vy: i32
 }
 
 impl Actor {
   pub fn update(&mut self) {
-    self.x += self.vx;
-    self.y += self.vy;
+    match self.direction {
+      Left => self.x -= self.v,
+      Neutral => {},
+      Right => self.x += self.v
+    };
+  }
+  pub fn change_dir(&mut self, direction: Direction) {
+    match (self.direction, direction) {
+      (Neutral, _) => self.direction = direction,
+      (Left, Right)
+      | (Right, Left) => self.direction = Neutral,
+      _ => {}
+    };
   }
 }
 
