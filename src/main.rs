@@ -1,13 +1,14 @@
 extern crate sdl2;
 
 mod actor;
+mod global;
 mod graphics;
 
 fn main() {
-  let graphics = graphics::Graphics::new(800, 600);
+  let graphics = graphics::Graphics::new(global::SCREEN_SIZE);
 
   let mut color = sdl2::pixels::RGB(0, 0, 0);
-  let mut character = actor::Actor::new(100, 500, 1, 20, 1);
+  let mut character = actor::Actor::new(100, 600, 1, 20, 1);
 
   'main: loop {
     'event: loop {

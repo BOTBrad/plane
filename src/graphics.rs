@@ -5,7 +5,7 @@ pub struct Graphics {
 }
 
 impl Graphics {
-  pub fn new(width: int, height: int) -> Graphics {
+  pub fn new((width, height): (int, int)) -> Graphics {
     sdl2::init(sdl2::InitVideo);
 
     let window = match sdl2::video::Window::new("rust-sdl2 demo: Video", sdl2::video::PosCentered, sdl2::video::PosCentered, width, height, sdl2::video::OpenGL) {
