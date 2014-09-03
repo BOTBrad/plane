@@ -1,4 +1,5 @@
 use graphics;
+use std;
 
 pub enum Direction {
   Left,
@@ -45,8 +46,6 @@ impl Actor {
   pub fn update(&mut self) {
     if self.y >= self.floor {
       // we are grounded
-      // don't fall through the floor
-      self.y = self.floor;
       // we can switch directions when not crouching
       if self.jump_state != Crouching {
         match self.direction {
@@ -73,7 +72,8 @@ impl Actor {
     }
     // we always move
     self.x += self.vx;
-    self.y += self.vy;
+    // don't fall through the floor
+    self.y = std::cmp::min(self.floor, self.y + self.vy);
   }
 
   pub fn change_dir(&mut self, direction: Direction) {
