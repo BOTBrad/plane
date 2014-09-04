@@ -1,5 +1,7 @@
 extern crate sdl2;
 
+use std;
+
 pub struct Graphics {
   renderer: sdl2::render::Renderer<sdl2::video::Window>
 }
@@ -21,12 +23,13 @@ impl Graphics {
       renderer: renderer
     }
   }
-  pub fn update<T: Renderable>(&self, renderable: &T, color: &sdl2::pixels::Color) {
-    let rect = renderable.render();
+  pub fn update(&self, render_list: std::vec::Vec<Rect>, color: &sdl2::pixels::Color) {
     let _ = self.renderer.set_draw_color(*color);
     let _ = self.renderer.clear();
     let _ = self.renderer.set_draw_color(sdl2::pixels::RGB(255, 255, 255));
-    let _ = self.renderer.fill_rect(&sdl2::rect::Rect{x: rect.x, y: rect.y, w: rect.w, h: rect.h});
+    for rect in render_list.iter() {
+      let _ = self.renderer.fill_rect(&sdl2::rect::Rect{x: rect.x, y: rect.y, w: rect.w, h: rect.h});
+    }
     self.renderer.present();
   }
   pub fn quit(&self) {

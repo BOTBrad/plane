@@ -41,7 +41,8 @@ fn main() {
     }
     // render
     character.update();
-    graphics.update(&character, &color);
+    let rect = (&character as &graphics::Renderable).render();
+    graphics.update(vec![rect], &color);
   }
   graphics.quit();
 }
