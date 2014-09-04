@@ -24,8 +24,8 @@ impl Graphics {
       renderer: renderer
     }
   }
-  pub fn update(&self, render_list: std::vec::Vec<data::Rect>, color: &sdl2::pixels::Color) {
-    let _ = self.renderer.set_draw_color(*color);
+  pub fn update(&self, render_list: std::vec::Vec<data::Rect>) {
+    let _ = self.renderer.set_draw_color(sdl2::pixels::RGB(0, 0, 0));
     let _ = self.renderer.clear();
     let _ = self.renderer.set_draw_color(sdl2::pixels::RGB(255, 255, 255));
     for rect in render_list.iter() {
