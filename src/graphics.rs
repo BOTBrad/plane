@@ -45,6 +45,7 @@ pub struct Rect {
 }
 
 // renderable
+#[deriving(Clone)]
 pub trait Renderable {
   fn render(&self) -> Rect;
 }
