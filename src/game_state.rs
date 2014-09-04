@@ -26,7 +26,7 @@ impl GameState {
     'event: loop {
       match sdl2::event::poll_event() {
         sdl2::event::QuitEvent(_) => return Quit,
-        sdl2::event::KeyDownEvent(_, _, key, _, _) => match key {
+        sdl2::event::KeyDownEvent(_, _, key, false, _, _) => match key {
           sdl2::keycode::EscapeKey
           | sdl2::keycode::QKey => return Quit,
           sdl2::keycode::Num1Key => self.color = sdl2::pixels::RGB(255, 0, 0),
@@ -38,7 +38,7 @@ impl GameState {
           sdl2::keycode::DKey => self.character.change_dir(actor::Right),
           _ => {}
         },
-        sdl2::event::KeyUpEvent(_, _, key, _, _) => match key {
+        sdl2::event::KeyUpEvent(_, _, key, false, _, _) => match key {
           sdl2::keycode::WKey => self.character.change_jump_state(actor::Crouching),
           sdl2::keycode::SKey => self.character.change_jump_state(actor::Jumping),
           sdl2::keycode::AKey => self.character.change_dir(actor::Right),

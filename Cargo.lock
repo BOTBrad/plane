@@ -2,11 +2,11 @@
 name = "plane"
 version = "0.0.1"
 dependencies = [
- "sdl2 0.0.1 (git+https://github.com/AngryLawyer/rust-sdl2.git#b4482ef47ef62714088d777bb784e5b94285b3ff)",
+ "sdl2 0.0.1 (git+https://github.com/UseBees/rust-sdl2.git#35c719e068df045d8c18db3167764ed88f581266)",
 ]
 
 [[package]]
 name = "sdl2"
 version = "0.0.1"
-source = "git+https://github.com/AngryLawyer/rust-sdl2.git#b4482ef47ef62714088d777bb784e5b94285b3ff"
+source = "git+https://github.com/UseBees/rust-sdl2.git#35c719e068df045d8c18db3167764ed88f581266"
 
