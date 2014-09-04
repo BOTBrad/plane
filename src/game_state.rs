@@ -1,6 +1,7 @@
 extern crate sdl2;
 
 use actor;
+use data;
 use graphics;
 use std;
 
@@ -10,7 +11,7 @@ pub struct GameState {
 }
 
 pub enum GameStateUpdate {
-  Render(std::vec::Vec<graphics::Rect>, sdl2::pixels::Color),
+  Render(std::vec::Vec<data::Rect>, sdl2::pixels::Color),
   Quit
 }
 

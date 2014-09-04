@@ -1,6 +1,7 @@
 extern crate sdl2;
 
 mod actor;
+mod data;
 mod game_state;
 mod global;
 mod graphics;

@@ -1,3 +1,4 @@
+use data;
 use graphics;
 use std;
 
@@ -96,7 +97,7 @@ impl Actor {
 }
 
 impl graphics::Renderable for Actor {
-  fn render(&self) -> graphics::Rect {
+  fn render(&self) -> data::Rect {
     let x = self.x;
     let y = self.y;
     let w = 48;
@@ -107,7 +108,7 @@ impl graphics::Renderable for Actor {
         128
       };
 
-    graphics::Rect {
+    data::Rect {
       x: x - w/2,
       y: y - h,
       w: w,
