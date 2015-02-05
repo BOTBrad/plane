@@ -3,7 +3,7 @@ extern crate sdl2;
 use std;
 
 pub struct Timer {
-  next_frame: (uint, u8)
+  next_frame: (u32, u8)
 }
 
 impl Timer {

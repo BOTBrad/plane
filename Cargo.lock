@@ -2,11 +2,40 @@
 name = "plane"
 version = "0.0.1"
 dependencies = [
- "sdl2 0.0.1 (git+https://github.com/UseBees/rust-sdl2.git#35c719e068df045d8c18db3167764ed88f581266)",
+ "sdl2 0.0.25 (git+https://github.com/AngryLawyer/rust-sdl2.git)",
 ]
 
 [[package]]
+name = "bitflags"
+version = "0.1.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+
+[[package]]
+name = "libc"
+version = "0.1.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+
+[[package]]
+name = "pkg-config"
+version = "0.1.7"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+
+[[package]]
 name = "sdl2"
-version = "0.0.1"
-source = "git+https://github.com/UseBees/rust-sdl2.git#35c719e068df045d8c18db3167764ed88f581266"
+version = "0.0.25"
+source = "git+https://github.com/AngryLawyer/rust-sdl2.git#778362c9120b24ce04eaec31665e4f053ff09b2f"
+dependencies = [
+ "bitflags 0.1.1 (registry+https://github.com/rust-lang/crates.io-index)",
+ "libc 0.1.2 (registry+https://github.com/rust-lang/crates.io-index)",
+ "sdl2-sys 0.0.25 (git+https://github.com/AngryLawyer/rust-sdl2.git)",
+]
+
+[[package]]
+name = "sdl2-sys"
+version = "0.0.25"
+source = "git+https://github.com/AngryLawyer/rust-sdl2.git#778362c9120b24ce04eaec31665e4f053ff09b2f"
+dependencies = [
+ "libc 0.1.2 (registry+https://github.com/rust-lang/crates.io-index)",
+ "pkg-config 0.1.7 (registry+https://github.com/rust-lang/crates.io-index)",
+]
 

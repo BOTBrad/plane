@@ -2,13 +2,15 @@ use data;
 use graphics;
 use std;
 
+#[derive(Copy)]
 pub enum Direction {
   Left,
   Neutral,
   Right
 }
 
-#[deriving(PartialEq)]
+#[derive(PartialEq)]
+#[derive(Copy)]
 pub enum JumpState {
   Crouching,
   Standing,
@@ -39,8 +41,8 @@ impl Actor {
       v: v,
       vx: 0,
       vy: 0,
-      jump_state: Standing,
-      direction: Neutral
+      jump_state: JumpState::Standing,
+      direction: Direction::Neutral
     }
   }
 
@@ -48,22 +50,22 @@ impl Actor {
     if self.y >= self.floor {
       // we are grounded
       // we can switch directions when not crouching
-      if self.jump_state != Crouching {
+      if self.jump_state != JumpState::Crouching {
         match self.direction {
-          Left => self.vx = -self.v,
-          Neutral => self.vx = 0,
-          Right => self.vx = self.v
+          Direction::Left => self.vx = -self.v,
+          Direction::Neutral => self.vx = 0,
+          Direction::Right => self.vx = self.v
         };
       }
       // jump if we are trying to
       match self.jump_state {
-        Crouching => {
+        JumpState::Crouching => {
           self.vx = 0;
           self.vy = 0
         },
-        Standing =>
+        JumpState::Standing =>
           self.vy = 0,
-        Jumping =>
+        JumpState::Jumping =>
           self.vy = -self.jump_v,
       };
     } else {
@@ -79,18 +81,18 @@ impl Actor {
 
   pub fn change_dir(&mut self, direction: Direction) {
     match (self.direction, direction) {
-      (Neutral, _) => self.direction = direction,
-      (Left, Right)
-      | (Right, Left) => self.direction = Neutral,
+      (Direction::Neutral, _) => self.direction = direction,
+      (Direction::Left, Direction::Right)
+      | (Direction::Right, Direction::Left) => self.direction = Direction::Neutral,
       _ => {}
     };
   }
 
   pub fn change_jump_state(&mut self, jump_state: JumpState) {
     match (self.jump_state, jump_state) {
-      (Standing, _) => self.jump_state = jump_state,
-      (Jumping, Crouching)
-      | (Crouching, Jumping) => self.jump_state = Standing,
+      (JumpState::Standing, _) => self.jump_state = jump_state,
+      (JumpState::Jumping, JumpState::Crouching)
+      | (JumpState::Crouching, JumpState::Jumping) => self.jump_state = JumpState::Standing,
       _ => {}
     };
   }
@@ -102,7 +104,7 @@ impl graphics::Renderable for Actor {
     let y = self.y;
     let w = 48;
     let h =
-      if self.jump_state == Crouching {
+      if self.jump_state == JumpState::Crouching {
         64
       } else {
         128

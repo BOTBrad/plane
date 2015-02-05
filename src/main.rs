@@ -16,8 +16,8 @@ fn main() {
     while !timer.is_next_frame() {}
     // update and render next frame
     match game_state.next_frame() {
-      game_state::Quit => break,
-      game_state::Render(render_list) => graphics.update(render_list)
+      game_state::GameStateUpdate::Quit => break,
+      game_state::GameStateUpdate::Render(render_list) => graphics.update(render_list)
     };
   }
   graphics.quit();

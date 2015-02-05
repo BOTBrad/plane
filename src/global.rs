@@ -1,1 +1,1 @@
-pub static SCREEN_SIZE: (int, int) = (1280, 720);
+pub static SCREEN_SIZE: (i32, i32) = (1280, 720);
