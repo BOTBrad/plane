@@ -118,3 +118,4 @@ impl graphics::Renderable for Actor {
     }
   }
 }
+

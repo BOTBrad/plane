@@ -46,3 +46,4 @@ impl Graphics {
 pub trait Renderable {
   fn render(&self) -> data::Rect;
 }
+
