@@ -17,7 +17,7 @@ pub enum GameStateUpdate {
 impl GameState {
   pub fn new() -> GameState {
     GameState {
-      character: actor::Actor::new(100, 600, 3, 40, 12)
+      character: actor::Actor::new(100, 600, 3)
     }
   }
 
@@ -28,15 +28,15 @@ impl GameState {
         sdl2::event::Event::KeyDown{keycode: key, repeat: false, ..} => match key {
           sdl2::keycode::KeyCode::Escape
           | sdl2::keycode::KeyCode::Q => return GameStateUpdate::Quit,
-          sdl2::keycode::KeyCode::W => self.character.change_jump_state(actor::JumpState::Jumping),
-          sdl2::keycode::KeyCode::S => self.character.change_jump_state(actor::JumpState::Crouching),
+          sdl2::keycode::KeyCode::W => (),
+          sdl2::keycode::KeyCode::S => (),
           sdl2::keycode::KeyCode::A => self.character.change_dir(actor::Direction::Left),
           sdl2::keycode::KeyCode::D => self.character.change_dir(actor::Direction::Right),
           _ => {}
         },
         sdl2::event::Event::KeyUp{keycode: key, repeat: false, ..} => match key {
-          sdl2::keycode::KeyCode::W => self.character.change_jump_state(actor::JumpState::Crouching),
-          sdl2::keycode::KeyCode::S => self.character.change_jump_state(actor::JumpState::Jumping),
+          sdl2::keycode::KeyCode::W => (),
+          sdl2::keycode::KeyCode::S => (),
           sdl2::keycode::KeyCode::A => self.character.change_dir(actor::Direction::Right),
           sdl2::keycode::KeyCode::D => self.character.change_dir(actor::Direction::Left),
           _ => {}
