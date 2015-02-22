@@ -23,7 +23,7 @@ impl Timer {
         ticks,
         match rounding {
           0 | 1 => time + 17,
-          _ => time + 16
+          _ => time + 16,
         });
       self.next_frame = (new_time, (rounding + 1) % 3);
       true

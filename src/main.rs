@@ -17,7 +17,7 @@ fn main() {
     // update and render next frame
     match game_state.next_frame() {
       game_state::GameStateUpdate::Quit => break,
-      game_state::GameStateUpdate::Render(render_list) => graphics.update(render_list)
+      game_state::GameStateUpdate::Render(render_list) => graphics.update(render_list),
     };
   }
   graphics.quit();

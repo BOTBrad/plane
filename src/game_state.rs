@@ -11,7 +11,7 @@ pub struct GameState {
 
 pub enum GameStateUpdate {
   Render(std::vec::Vec<data::Rect>),
-  Quit
+  Quit,
 }
 
 impl GameState {
@@ -32,17 +32,17 @@ impl GameState {
           sdl2::keycode::KeyCode::S => (),
           sdl2::keycode::KeyCode::A => self.character.change_dir(actor::Direction::Left),
           sdl2::keycode::KeyCode::D => self.character.change_dir(actor::Direction::Right),
-          _ => {}
+          _ => {},
         },
         sdl2::event::Event::KeyUp{keycode: key, repeat: false, ..} => match key {
           sdl2::keycode::KeyCode::W => (),
           sdl2::keycode::KeyCode::S => (),
           sdl2::keycode::KeyCode::A => self.character.change_dir(actor::Direction::Right),
           sdl2::keycode::KeyCode::D => self.character.change_dir(actor::Direction::Left),
-          _ => {}
+          _ => {},
         },
         sdl2::event::Event::None => break,
-        _ => {}
+        _ => {},
       }
     }
     self.character.update();

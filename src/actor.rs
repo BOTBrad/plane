@@ -5,7 +5,7 @@ use graphics;
 pub enum Direction {
   Left,
   Neutral,
-  Right
+  Right,
 }
 
 pub struct Actor {
@@ -13,7 +13,7 @@ pub struct Actor {
   pub y: i32,
   v: i32,
   vx: i32,
-  direction: Direction
+  direction: Direction,
 }
 
 impl Actor {
@@ -23,7 +23,7 @@ impl Actor {
       y: y,
       v: v,
       vx: 0,
-      direction: Direction::Neutral
+      direction: Direction::Neutral,
     }
   }
 
@@ -42,7 +42,7 @@ impl Actor {
       (Direction::Neutral, _) => self.direction = direction,
       (Direction::Left, Direction::Right)
       | (Direction::Right, Direction::Left) => self.direction = Direction::Neutral,
-      _ => {}
+      _ => {},
     };
   }
 }
@@ -58,7 +58,7 @@ impl graphics::Renderable for Actor {
       x: x - w/2,
       y: y - h,
       w: w,
-      h: h
+      h: h,
     }
   }
 }
