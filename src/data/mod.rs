@@ -1,3 +1,7 @@
+pub use self::direction::Direction;
+
+mod direction;
+
 pub struct Rect {
   pub x: i32,
   pub y: i32,

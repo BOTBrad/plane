@@ -1,12 +1,5 @@
-use data;
+use data::{Rect, Direction};
 use graphics;
-
-#[derive(Copy)]
-pub enum Direction {
-  Left,
-  Neutral,
-  Right,
-}
 
 pub struct Actor {
   pub x: i32,
@@ -48,13 +41,13 @@ impl Actor {
 }
 
 impl graphics::Renderable for Actor {
-  fn render(&self) -> data::Rect {
+  fn render(&self) -> Rect {
     let x = self.x;
     let y = self.y;
     let w = 48;
     let h = 64;
 
-    data::Rect {
+    Rect {
       x: x - w/2,
       y: y - h,
       w: w,
