@@ -1,5 +1,9 @@
 extern crate sdl2;
 
+use graphics::Graphics;
+use game_state::{GameState, GameStateUpdate};
+use timer::Timer;
+
 mod actor;
 mod data;
 mod game_state;
@@ -8,16 +12,16 @@ mod graphics;
 mod timer;
 
 fn main() {
-  let graphics = graphics::Graphics::new(global::SCREEN_SIZE);
-  let mut game_state = game_state::GameState::new();
-  let mut timer = timer::Timer::new();
+  let graphics = Graphics::new(global::SCREEN_SIZE);
+  let mut game_state = GameState::new();
+  let mut timer = Timer::new();
 
   'main: loop {
     while !timer.is_next_frame() {}
     // update and render next frame
     match game_state.next_frame() {
-      game_state::GameStateUpdate::Quit => break,
-      game_state::GameStateUpdate::Render(render_list) => graphics.update(render_list),
+      GameStateUpdate::Quit => break,
+      GameStateUpdate::Render(render_list) => graphics.update(render_list),
     };
   }
   graphics.quit();

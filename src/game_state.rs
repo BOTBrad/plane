@@ -1,47 +1,50 @@
 extern crate sdl2;
 
-use actor;
-use data;
+use sdl2::event::Event;
+use sdl2::keycode::KeyCode;
+
+use actor::Actor;
+use data::{Direction, Rect};
 use graphics;
-use std;
+use std::vec::Vec;
 
 pub struct GameState {
-  character: actor::Actor
+  character: Actor
 }
 
 pub enum GameStateUpdate {
-  Render(std::vec::Vec<data::Rect>),
+  Render(Vec<Rect>),
   Quit,
 }
 
 impl GameState {
   pub fn new() -> GameState {
     GameState {
-      character: actor::Actor::new(100, 600, 3)
+      character: Actor::new(100, 600, 3)
     }
   }
 
   pub fn next_frame(&mut self) -> GameStateUpdate {
     'event: loop {
       match sdl2::event::poll_event() {
-        sdl2::event::Event::Quit{..} => return GameStateUpdate::Quit,
-        sdl2::event::Event::KeyDown{keycode: key, repeat: false, ..} => match key {
-          sdl2::keycode::KeyCode::Escape
-          | sdl2::keycode::KeyCode::Q => return GameStateUpdate::Quit,
-          sdl2::keycode::KeyCode::W => (),
-          sdl2::keycode::KeyCode::S => (),
-          sdl2::keycode::KeyCode::A => self.character.change_dir(data::Direction::Left),
-          sdl2::keycode::KeyCode::D => self.character.change_dir(data::Direction::Right),
+        Event::Quit{..} => return GameStateUpdate::Quit,
+        Event::KeyDown{keycode: key, repeat: false, ..} => match key {
+          KeyCode::Escape
+          | KeyCode::Q => return GameStateUpdate::Quit,
+          KeyCode::W => (),
+          KeyCode::S => (),
+          KeyCode::A => self.character.change_dir(Direction::Left),
+          KeyCode::D => self.character.change_dir(Direction::Right),
           _ => {},
         },
-        sdl2::event::Event::KeyUp{keycode: key, repeat: false, ..} => match key {
-          sdl2::keycode::KeyCode::W => (),
-          sdl2::keycode::KeyCode::S => (),
-          sdl2::keycode::KeyCode::A => self.character.change_dir(data::Direction::Right),
-          sdl2::keycode::KeyCode::D => self.character.change_dir(data::Direction::Left),
+        Event::KeyUp{keycode: key, repeat: false, ..} => match key {
+          KeyCode::W => (),
+          KeyCode::S => (),
+          KeyCode::A => self.character.change_dir(Direction::Right),
+          KeyCode::D => self.character.change_dir(Direction::Left),
           _ => {},
         },
-        sdl2::event::Event::None => break,
+        Event::None => break,
         _ => {},
       }
     }

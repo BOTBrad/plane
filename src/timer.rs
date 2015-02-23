@@ -1,6 +1,8 @@
 extern crate sdl2;
 
-use std;
+use sdl2::timer;
+
+use std::cmp::max;
 
 pub struct Timer {
   next_frame: (u32, u8)
@@ -15,11 +17,11 @@ impl Timer {
 
   // hardcoded to 60fps
   pub fn is_next_frame(&mut self) -> bool {
-    let ticks = sdl2::timer::get_ticks();
+    let ticks = timer::get_ticks();
     let (time, rounding) = self.next_frame;
 
     if ticks >= time {
-      let new_time = std::cmp::max(
+      let new_time = max(
         ticks,
         match rounding {
           0 | 1 => time + 17,
