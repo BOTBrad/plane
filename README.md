@@ -8,6 +8,6 @@ A project in rust that I started on a plane
 
 ## Controls
 
-W, A, S, D - to move, jump, and crouch.
+W, A, S, D - to move
 
 Q, Esc - to quit
