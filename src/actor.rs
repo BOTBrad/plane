@@ -1,4 +1,4 @@
-use data::{Rect, Direction};
+use data::{direction, Direction, Rect};
 use graphics;
 
 pub struct Actor {
@@ -6,6 +6,7 @@ pub struct Actor {
   pub y: i32,
   v: i32,
   vx: i32,
+  vy: i32,
   direction: Direction,
 }
 
@@ -16,14 +17,19 @@ impl Actor {
       y: y,
       v: v,
       vx: 0,
-      direction: Direction::neutral(),
+      vy: 0,
+      direction: direction::NEUTRAL,
     }
   }
 
   pub fn update(&mut self) {
     let (vx, vy) = self.direction.to_normalized_pair(self.v);
-    self.x += vx;
-    self.y += vy;
+    self.vx = vx;
+    self.vy = vy;
+
+    // move
+    self.x += self.vx;
+    self.y += self.vy;
   }
 
   pub fn change_dir(&mut self, direction: Direction) {

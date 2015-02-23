@@ -1,6 +1,6 @@
 pub use self::direction::Direction;
 
-mod direction;
+pub mod direction;
 
 pub struct Rect {
   pub x: i32,
