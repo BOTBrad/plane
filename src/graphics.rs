@@ -15,7 +15,7 @@ impl Graphics {
   pub fn new((width, height): (i32, i32)) -> Graphics {
     sdl2::init(sdl2::INIT_VIDEO);
 
-    let window = match Window::new("rust-sdl2 demo: Video", WindowPos::PosCentered, WindowPos::PosCentered, width, height, OPENGL) {
+    let window = match Window::new("plane", WindowPos::PosCentered, WindowPos::PosCentered, width, height, OPENGL) {
       Ok(new_window) => new_window,
       Err(err) => panic!(format!("failed to create window: {}", err))
     };
