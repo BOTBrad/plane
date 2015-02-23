@@ -63,7 +63,7 @@ impl Direction {
     match pair {
       (0, _)
       | (_, 0) => pair,
-      (a, b) => (a * 12 / 17, b * 12 / 17),
+      (a, b) => (a * 12 / 17, b * 12 / 17), // divide by sqrt(2) approximation
     }
   }
 }
