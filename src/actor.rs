@@ -16,27 +16,18 @@ impl Actor {
       y: y,
       v: v,
       vx: 0,
-      direction: Direction::Neutral,
+      direction: Direction::neutral(),
     }
   }
 
   pub fn update(&mut self) {
-    self.vx = match self.direction {
-      Direction::Left => -self.v,
-      Direction::Neutral => 0,
-      Direction::Right => self.v,
-    };
-    // we always move
-    self.x += self.vx;
+    let (vx, vy) = self.direction.to_normalized_pair(self.v);
+    self.x += vx;
+    self.y += vy;
   }
 
   pub fn change_dir(&mut self, direction: Direction) {
-    match (self.direction, direction) {
-      (Direction::Neutral, _) => self.direction = direction,
-      (Direction::Left, Direction::Right)
-      | (Direction::Right, Direction::Left) => self.direction = Direction::Neutral,
-      _ => {},
-    };
+    self.direction = Direction::combine(self.direction, direction);
   }
 }
 
