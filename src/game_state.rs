@@ -20,7 +20,7 @@ pub enum GameStateUpdate {
 impl GameState {
   pub fn new() -> GameState {
     GameState {
-      character: Actor::new(100, 600, 3)
+      character: Actor::new(100, 600, 6)
     }
   }
 
