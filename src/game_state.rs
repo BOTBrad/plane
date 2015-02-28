@@ -1,6 +1,6 @@
 extern crate sdl2;
 
-use sdl2::event::Event;
+use sdl2::event::{self, Event};
 use sdl2::keycode::KeyCode;
 
 use actor::Actor;
@@ -26,7 +26,7 @@ impl GameState {
 
   pub fn next_frame(&mut self) -> GameStateUpdate {
     'event: loop {
-      match sdl2::event::poll_event() {
+      match event::poll_event() {
         Event::Quit{..} => return GameStateUpdate::Quit,
         Event::KeyDown{keycode: key, repeat: false, ..} => match key {
           KeyCode::Escape
