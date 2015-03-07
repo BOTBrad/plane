@@ -1,5 +1,5 @@
 use data::{direction, Direction, Rect};
-use graphics;
+use graphics::{self, RenderList};
 
 pub struct Actor {
   pub x: i32,
@@ -38,18 +38,18 @@ impl Actor {
 }
 
 impl graphics::Renderable for Actor {
-  fn render(&self) -> Rect {
+  fn render(&self) -> RenderList {
     let x = self.x;
     let y = self.y;
     let w = 48;
     let h = 64;
 
-    Rect {
+    vec![Rect {
       x: x - w/2,
       y: y - h,
       w: w,
       h: h,
-    }
+    }]
   }
 }
 

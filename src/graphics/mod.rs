@@ -12,8 +12,14 @@ use sdl2::render::{
 };
 use sdl2::pixels::Color;
 
-use data;
+pub use self::renderable::{
+  Renderable,
+  RenderList,
+};
+
 use std::vec::Vec;
+
+pub mod renderable;
 
 pub struct Graphics {
   renderer: sdl2::render::Renderer
@@ -36,15 +42,17 @@ impl Graphics {
       renderer: renderer
     }
   }
-  pub fn update(&self, render_list: Vec<data::Rect>) {
+  pub fn update(&self, render_lists: Vec<RenderList>) {
     let mut drawer = self.renderer.drawer();
 
     let _ = drawer.set_draw_color(Color::RGB(0, 0, 0));
     let _ = drawer.clear();
     let _ = drawer.set_draw_color(Color::RGB(255, 255, 255));
 
-    for rect in render_list.iter() {
-      let _ = drawer.fill_rect(sdl2::rect::Rect{x: rect.x, y: rect.y, w: rect.w, h: rect.h});
+    for list in render_lists.iter() {
+      for rect in list.iter() {
+        let _ = drawer.fill_rect(sdl2::rect::Rect{x: rect.x, y: rect.y, w: rect.w, h: rect.h});
+      }
     }
 
     drawer.present();
@@ -52,10 +60,5 @@ impl Graphics {
   pub fn quit(&self) {
     sdl2::quit();
   }
-}
-
-// renderable
-pub trait Renderable {
-  fn render(&self) -> data::Rect;
 }
 

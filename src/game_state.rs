@@ -4,8 +4,8 @@ use sdl2::event::{self, Event};
 use sdl2::keycode::KeyCode;
 
 use actor::Actor;
-use data::{direction, Rect};
-use graphics;
+use data::direction;
+use graphics::{self, RenderList};
 use std::vec::Vec;
 
 pub struct GameState {
@@ -13,7 +13,7 @@ pub struct GameState {
 }
 
 pub enum GameStateUpdate {
-  Render(Vec<Rect>),
+  Render(Vec<RenderList>),
   Quit,
 }
 
