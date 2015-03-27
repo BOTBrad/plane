@@ -1,4 +1,4 @@
-use data::{direction, Direction, Rect};
+use data::{Direction, Rect};
 use graphics::{self, RenderList};
 
 pub struct Actor {
@@ -18,7 +18,7 @@ impl Actor {
       v: v,
       vx: 0,
       vy: 0,
-      direction: direction::NEUTRAL,
+      direction: Direction::neutral(),
     }
   }
 

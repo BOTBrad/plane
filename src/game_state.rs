@@ -4,7 +4,7 @@ use sdl2::event::{self, Event};
 use sdl2::keycode::KeyCode;
 
 use actor::Actor;
-use data::direction;
+use data::Direction;
 use graphics::{self, RenderList};
 use std::vec::Vec;
 
@@ -31,17 +31,17 @@ impl GameState {
         Event::KeyDown{keycode: key, repeat: false, ..} => match key {
           KeyCode::Escape
           | KeyCode::Q => return GameStateUpdate::Quit,
-          KeyCode::W => self.character.change_dir(direction::UP),
-          KeyCode::S => self.character.change_dir(direction::DOWN),
-          KeyCode::A => self.character.change_dir(direction::LEFT),
-          KeyCode::D => self.character.change_dir(direction::RIGHT),
+          KeyCode::W => self.character.change_dir(Direction::up()),
+          KeyCode::S => self.character.change_dir(Direction::down()),
+          KeyCode::A => self.character.change_dir(Direction::left()),
+          KeyCode::D => self.character.change_dir(Direction::right()),
           _ => {},
         },
         Event::KeyUp{keycode: key, repeat: false, ..} => match key {
-          KeyCode::W => self.character.change_dir(direction::DOWN),
-          KeyCode::S => self.character.change_dir(direction::UP),
-          KeyCode::A => self.character.change_dir(direction::RIGHT),
-          KeyCode::D => self.character.change_dir(direction::LEFT),
+          KeyCode::W => self.character.change_dir(Direction::down()),
+          KeyCode::S => self.character.change_dir(Direction::up()),
+          KeyCode::A => self.character.change_dir(Direction::right()),
+          KeyCode::D => self.character.change_dir(Direction::left()),
           _ => {},
         },
         Event::None => break,

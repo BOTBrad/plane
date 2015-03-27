@@ -39,13 +39,33 @@ impl CardinalH {
   }
 }
 
-pub const LEFT: Direction = Direction(CardinalH::Left, CardinalV::Neutral);
-pub const DOWN: Direction = Direction(CardinalH::Neutral, CardinalV::Down);
-pub const UP: Direction = Direction(CardinalH::Neutral, CardinalV::Up);
-pub const RIGHT: Direction = Direction(CardinalH::Right, CardinalV::Neutral);
-pub const NEUTRAL: Direction = Direction(CardinalH::Neutral, CardinalV::Neutral);
+const LEFT: Direction = Direction(CardinalH::Left, CardinalV::Neutral);
+const DOWN: Direction = Direction(CardinalH::Neutral, CardinalV::Down);
+const UP: Direction = Direction(CardinalH::Neutral, CardinalV::Up);
+const RIGHT: Direction = Direction(CardinalH::Right, CardinalV::Neutral);
+const NEUTRAL: Direction = Direction(CardinalH::Neutral, CardinalV::Neutral);
 
 impl Direction {
+  pub fn left() -> Direction {
+    LEFT
+  }
+
+  pub fn down() -> Direction {
+    DOWN
+  }
+
+  pub fn up() -> Direction {
+    UP
+  }
+
+  pub fn right() -> Direction {
+    RIGHT
+  }
+
+  pub fn neutral() -> Direction {
+    NEUTRAL
+  }
+
   pub fn combine(d1: Direction, d2: Direction) -> Direction {
     let Direction(h1, v1) = d1;
     let Direction(h2, v2) = d2;
