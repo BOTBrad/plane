@@ -1,13 +1,11 @@
-use std::num::FromPrimitive;
-
-#[derive(Copy, PartialEq, FromPrimitive)]
+#[derive(Copy, PartialEq)]
 enum CardinalH {
   Left = -1,
   Neutral = 0,
   Right = 1,
 }
 
-#[derive(Copy, PartialEq, FromPrimitive)]
+#[derive(Copy, PartialEq)]
 enum CardinalV {
   Up = -1,
   Neutral = 0,
@@ -19,22 +17,24 @@ enum CardinalV {
 #[derive(Copy)]
 pub struct Direction(CardinalH, CardinalV);
 
-impl CardinalV {
-  fn combine(v1: CardinalV, v2: CardinalV) -> CardinalV {
-    if v1 == v2 {
-      v1
-    } else {
-      FromPrimitive::from_i8(v1 as i8 + v2 as i8).unwrap_or(CardinalV::Neutral)
+impl CardinalH {
+  fn combine(v1: CardinalH, v2: CardinalH) -> CardinalH {
+    match (v1 as i8) + (v2 as i8) {
+      -2 | -1 => CardinalH::Left,
+      0 => CardinalH::Neutral,
+      1 | 2 => CardinalH::Right,
+      _ => unreachable!(),
     }
   }
 }
 
-impl CardinalH {
-  fn combine(h1: CardinalH, h2: CardinalH) -> CardinalH {
-    if h1 == h2 {
-      h1
-    } else {
-      FromPrimitive::from_i8(h1 as i8 + h2 as i8).unwrap_or(CardinalH::Neutral)
+impl CardinalV {
+  fn combine(v1: CardinalV, v2: CardinalV) -> CardinalV {
+    match (v1 as i8) + (v2 as i8) {
+      -2 | -1 => CardinalV::Up,
+      0 => CardinalV::Neutral,
+      1 | 2 => CardinalV::Down,
+      _ => unreachable!(),
     }
   }
 }
